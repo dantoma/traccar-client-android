@@ -20,6 +20,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -60,6 +61,7 @@ public class RequestManager {
             connection.setRequestMethod("POST");
             connection.connect();
             inputStream = connection.getInputStream();
+
             while (inputStream.read() != -1);
             return true;
         } catch (IOException error) {

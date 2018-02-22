@@ -73,6 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE position (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "deviceId TEXT," +
+                "carId TEXT," +
+                "driverId TEXT," +
                 "time INTEGER," +
                 "latitude REAL," +
                 "longitude REAL," +
@@ -92,6 +94,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertPosition(Position position) {
         ContentValues values = new ContentValues();
         values.put("deviceId", position.getDeviceId());
+        values.put("carId", position.getCarId());
+        values.put("driverId", position.getDriverId());
         values.put("time", position.getTime().getTime());
         values.put("latitude", position.getLatitude());
         values.put("longitude", position.getLongitude());
@@ -125,6 +129,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 position.setId(cursor.getLong(cursor.getColumnIndex("id")));
                 position.setDeviceId(cursor.getString(cursor.getColumnIndex("deviceId")));
+                position.setCarId(cursor.getString(cursor.getColumnIndex("carId")));
+                position.setDriverId(cursor.getString(cursor.getColumnIndex("driverId")));
                 position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
                 position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
                 position.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));

@@ -47,6 +47,8 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
     private LostApiClient apiClient;
 
     private String deviceId;
+    private String carId;
+    private String driverId;
     private long interval;
     private double distance;
     private double angle;
@@ -62,6 +64,8 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         deviceId = preferences.getString(MainFragment.KEY_DEVICE, "undefined");
+        carId = preferences.getString(MainFragment.KEY_CAR, "undefined");
+        driverId = preferences.getString(MainFragment.KEY_DRIVER, "undefined");
         interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
@@ -105,7 +109,7 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
                 || angle > 0 && Math.abs(location.getBearing() - lastLocation.getBearing()) >= angle)) {
             Log.i(TAG, "location new");
             lastLocation = location;
-            listener.onPositionUpdate(new Position(deviceId, location, getBatteryLevel(context)));
+            listener.onPositionUpdate(new Position(deviceId, carId, driverId, location, getBatteryLevel(context)));
         } else {
             Log.i(TAG, location != null ? "location ignored" : "location nil");
         }

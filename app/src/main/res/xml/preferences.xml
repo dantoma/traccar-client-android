@@ -15,6 +15,16 @@
         android:title="@string/settings_id_title" />
 
     <EditTextPreference
+        android:key="carId"
+        android:title="@string/settings_car_id_title"
+        android:summary="Car identifier" />
+
+    <EditTextPreference
+        android:key="driverId"
+        android:title="@string/settings_driver_id_title"
+        android:summary="Driver identifier" />
+
+    <EditTextPreference
         android:defaultValue="@string/settings_url_default_value"
         android:key="url"
         android:summary="@string/settings_url_summary"

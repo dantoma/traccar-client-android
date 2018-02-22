@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Traccar Client</string>
-  <string name="app_logo">Traccar</string>
+  <string name="app_name">Car tracker</string>
+  <string name="app_logo">Cartrack</string>
   <string name="shortcut_start">Start service</string>
   <string name="shortcut_stop">Stop service</string>
   <string name="shortcut_sos">Send SOS</string>
   <string name="channel_default">Primary Channel</string>
   <string name="settings_id_title">Device identifier</string>
+  <string name="settings_car_id_title">Car identifier</string>
+  <string name="settings_driver_id_title">Driver identifier</string>
   <string name="settings_url_title">Server URL</string>
   <string name="settings_url_summary">Tracking server URL</string>
   <string name="settings_interval_title">Frequency</string>

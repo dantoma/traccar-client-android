@@ -25,8 +25,10 @@ public class Position {
     public Position() {
     }
 
-    public Position(String deviceId, Location location, double battery) {
+    public Position(String deviceId, String carId, String driverId, Location location, double battery) {
         this.deviceId = deviceId;
+        this.carId = carId;
+        this.driverId = driverId;
         time = new Date(location.getTime());
         latitude = location.getLatitude();
         longitude = location.getLongitude();
@@ -50,13 +52,31 @@ public class Position {
     }
 
     private String deviceId;
+    private String carId;
+    private String driverId;
 
     public String getDeviceId() {
         return deviceId;
     }
 
+    public String getCarId() {
+        return carId;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 
     private Date time;

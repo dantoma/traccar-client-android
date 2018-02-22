@@ -54,6 +54,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
     private static final int ALARM_MANAGER_INTERVAL = 15000;
 
     public static final String KEY_DEVICE = "id";
+    public static final String KEY_CAR = "carId";
+    public static final String KEY_DRIVER = "driverId";
     public static final String KEY_URL = "url";
     public static final String KEY_INTERVAL = "interval";
     public static final String KEY_DISTANCE = "distance";
@@ -82,6 +84,18 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         initPreferences();
 
         findPreference(KEY_DEVICE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return newValue != null && !newValue.equals("");
+            }
+        });
+        findPreference(KEY_CAR).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return newValue != null && !newValue.equals("");
+            }
+        });
+        findPreference(KEY_DRIVER).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 return newValue != null && !newValue.equals("");
@@ -171,6 +185,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     private void setPreferencesEnabled(boolean enabled) {
         findPreference(KEY_DEVICE).setEnabled(enabled);
+        findPreference(KEY_CAR).setEnabled(enabled);
+        findPreference(KEY_DRIVER).setEnabled(enabled);
         findPreference(KEY_URL).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
@@ -188,6 +204,10 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             }
         } else if (key.equals(KEY_DEVICE)) {
             findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+        } else if (key.equals(KEY_CAR)) {
+            findPreference(KEY_CAR).setSummary(sharedPreferences.getString(KEY_CAR, null));
+        } else if (key.equals(KEY_DRIVER)) {
+            findPreference(KEY_DRIVER).setSummary(sharedPreferences.getString(KEY_DRIVER, null));
         }
     }
 
@@ -218,6 +238,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             ((EditTextPreference) findPreference(KEY_DEVICE)).setText(id);
         }
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
+        findPreference(KEY_CAR).setSummary(sharedPreferences.getString(KEY_CAR, null));
+        findPreference(KEY_DRIVER).setSummary(sharedPreferences.getString(KEY_DRIVER, null));
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {
