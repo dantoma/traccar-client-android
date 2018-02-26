@@ -28,8 +28,8 @@ public class ProtocolFormatter {
         Uri.Builder builder;
 
         builder = serverUrl.buildUpon()
-                .appendQueryParameter("id", position.getDeviceId())
-                .appendQueryParameter("session_id",sessionId )
+                .appendQueryParameter("device_id", position.getDeviceId())
+                .appendQueryParameter("track_id",sessionId )
                 .appendQueryParameter("car_id", position.getCarId())
                 .appendQueryParameter("driver_id", position.getDriverId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))
