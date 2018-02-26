@@ -22,6 +22,8 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.util.UUID;
+
 public class TrackingController implements PositionProvider.PositionListener, NetworkManager.NetworkHandler {
 
     private static final String TAG = TrackingController.class.getSimpleName();
@@ -42,6 +44,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private NetworkManager networkManager;
 
     private PowerManager.WakeLock wakeLock;
+    private String sessionId;
 
     private void lock() {
         wakeLock.acquire(WAKE_LOCK_TIMEOUT);
@@ -55,6 +58,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
 
     public TrackingController(Context context) {
         this.context = context;
+        this.sessionId = UUID.randomUUID().toString();
         handler = new Handler();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         positionProvider = new PositionProvider(context, this);
@@ -63,6 +67,10 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
         isOnline = networkManager.isOnline();
 
         url = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value));
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("sessionId",sessionId);
+        editor.commit();
 
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
@@ -187,7 +195,7 @@ public class TrackingController implements PositionProvider.PositionListener, Ne
     private void send(final Position position) {
         log("send", position);
         lock();
-        String request = ProtocolFormatter.formatRequest(url, position);
+        String request = ProtocolFormatter.formatRequest(url, position, sessionId);
         RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
             @Override
             public void onComplete(boolean success) {

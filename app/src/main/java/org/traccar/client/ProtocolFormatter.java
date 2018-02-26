@@ -19,14 +19,17 @@ import android.net.Uri;
 
 public class ProtocolFormatter {
 
-    public static String formatRequest(String url, Position position) {
-        return formatRequest(url, position, null);
+    public static String formatRequest(String url, Position position, String sessionId) {
+        return formatRequest(url, position, null, sessionId);
     }
 
-    public static String formatRequest(String url, Position position, String alarm) {
+    public static String formatRequest(String url, Position position, String alarm, String sessionId) {
         Uri serverUrl = Uri.parse(url);
-        Uri.Builder builder = serverUrl.buildUpon()
+        Uri.Builder builder;
+
+        builder = serverUrl.buildUpon()
                 .appendQueryParameter("id", position.getDeviceId())
+                .appendQueryParameter("session_id",sessionId )
                 .appendQueryParameter("car_id", position.getCarId())
                 .appendQueryParameter("driver_id", position.getDriverId())
                 .appendQueryParameter("timestamp", String.valueOf(position.getTime().getTime() / 1000))

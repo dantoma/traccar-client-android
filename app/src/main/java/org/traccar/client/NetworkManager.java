@@ -23,15 +23,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import java.util.UUID;
+
 public class NetworkManager extends BroadcastReceiver {
 
     private static final String TAG = NetworkManager.class.getSimpleName();
 
     private Context context;
+
     private NetworkHandler handler;
     private ConnectivityManager connectivityManager;
 
     public NetworkManager(Context context, NetworkHandler handler) {
+
         this.context = context;
         this.handler = handler;
         connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

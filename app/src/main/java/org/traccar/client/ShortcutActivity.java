@@ -35,6 +35,8 @@ import android.widget.Toast;
 import com.mapzen.android.lost.api.LocationServices;
 import com.mapzen.android.lost.api.LostApiClient;
 
+import java.util.UUID;
+
 public class ShortcutActivity extends AppCompatActivity implements LostApiClient.ConnectionCallbacks {
 
     public static final String EXTRA_ACTION = "action";
@@ -123,7 +125,7 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
                     location, PositionProvider.getBatteryLevel(this));
 
             String request = ProtocolFormatter.formatRequest(
-                    preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS);
+                    preferences.getString(MainFragment.KEY_URL, null), position, ALARM_SOS, preferences.getString("sessionId", UUID.randomUUID().toString()));
 
             RequestManager.sendRequestAsync(request, new RequestManager.RequestHandler() {
                 @Override
