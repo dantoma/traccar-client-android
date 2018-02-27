@@ -18,15 +18,18 @@ package org.traccar.client;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class RequestManager {
 
     private static final int TIMEOUT = 15 * 1000;
+    private String request;
 
     public interface RequestHandler {
         void onComplete(boolean success);
@@ -54,11 +57,21 @@ public class RequestManager {
     public static boolean sendRequest(String request) {
         InputStream inputStream = null;
         try {
-            URL url = new URL(request);
+            String cleanUrl = request.replace(new URL(request).getQuery(), "");
+            URL url = new URL(cleanUrl);
+
+            byte[] postDataBytes = new URL(request).getQuery().toString().getBytes("UTF-8");
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(TIMEOUT);
             connection.setConnectTimeout(TIMEOUT);
             connection.setRequestMethod("POST");
+
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(postDataBytes);
+
             connection.connect();
             inputStream = connection.getInputStream();
 
