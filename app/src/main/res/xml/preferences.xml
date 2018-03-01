@@ -25,6 +25,11 @@
         android:summary="Driver identifier" />
 
     <EditTextPreference
+        android:key="odometer"
+        android:title="@string/settings_odometer_title"
+        android:summary="Odometer reading" />
+
+    <EditTextPreference
         android:defaultValue="@string/settings_url_default_value"
         android:key="url"
         android:summary="@string/settings_url_summary"

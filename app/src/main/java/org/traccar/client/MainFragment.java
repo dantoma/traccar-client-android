@@ -55,6 +55,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
 
     public static final String KEY_DEVICE = "id";
     public static final String KEY_CAR = "carId";
+    public static final String KEY_ODOMETER = "odometer";
     public static final String KEY_DRIVER = "driverId";
     public static final String KEY_URL = "url";
     public static final String KEY_INTERVAL = "interval";
@@ -96,6 +97,12 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             }
         });
         findPreference(KEY_DRIVER).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                return newValue != null && !newValue.equals("");
+            }
+        });
+        findPreference(KEY_ODOMETER).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 return newValue != null && !newValue.equals("");
@@ -187,6 +194,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_DEVICE).setEnabled(enabled);
         findPreference(KEY_CAR).setEnabled(enabled);
         findPreference(KEY_DRIVER).setEnabled(enabled);
+        findPreference(KEY_ODOMETER).setEnabled(enabled);
         findPreference(KEY_URL).setEnabled(enabled);
         findPreference(KEY_INTERVAL).setEnabled(enabled);
         findPreference(KEY_DISTANCE).setEnabled(enabled);
@@ -208,6 +216,8 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
             findPreference(KEY_CAR).setSummary(sharedPreferences.getString(KEY_CAR, null));
         } else if (key.equals(KEY_DRIVER)) {
             findPreference(KEY_DRIVER).setSummary(sharedPreferences.getString(KEY_DRIVER, null));
+        } else if (key.equals(KEY_ODOMETER)) {
+            findPreference(KEY_ODOMETER).setSummary(sharedPreferences.getString(KEY_ODOMETER, null));
         }
     }
 
@@ -240,6 +250,7 @@ public class MainFragment extends PreferenceFragment implements OnSharedPreferen
         findPreference(KEY_DEVICE).setSummary(sharedPreferences.getString(KEY_DEVICE, null));
         findPreference(KEY_CAR).setSummary(sharedPreferences.getString(KEY_CAR, null));
         findPreference(KEY_DRIVER).setSummary(sharedPreferences.getString(KEY_DRIVER, null));
+        findPreference(KEY_ODOMETER).setSummary(sharedPreferences.getString(KEY_ODOMETER, null));
     }
 
     private void startTrackingService(boolean checkPermission, boolean permission) {

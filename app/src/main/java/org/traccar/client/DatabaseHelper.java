@@ -74,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "deviceId TEXT," +
                 "carId TEXT," +
+                "odometer TEXT," +
                 "driverId TEXT," +
                 "time INTEGER," +
                 "latitude REAL," +
@@ -95,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("deviceId", position.getDeviceId());
         values.put("carId", position.getCarId());
+        values.put("odometer", position.getOdometer());
         values.put("driverId", position.getDriverId());
         values.put("time", position.getTime().getTime());
         values.put("latitude", position.getLatitude());
@@ -130,6 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 position.setId(cursor.getLong(cursor.getColumnIndex("id")));
                 position.setDeviceId(cursor.getString(cursor.getColumnIndex("deviceId")));
                 position.setCarId(cursor.getString(cursor.getColumnIndex("carId")));
+                position.setOdometer(cursor.getString(cursor.getColumnIndex("odometer")));
                 position.setDriverId(cursor.getString(cursor.getColumnIndex("driverId")));
                 position.setTime(new Date(cursor.getLong(cursor.getColumnIndex("time"))));
                 position.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));

@@ -9,6 +9,7 @@
   <string name="settings_id_title">Device identifier</string>
   <string name="settings_car_id_title">Car identifier</string>
   <string name="settings_driver_id_title">Driver identifier</string>
+  <string name="settings_odometer_title">Odometer</string>
   <string name="settings_url_title">Server URL</string>
   <string name="settings_url_summary">Tracking server URL</string>
   <string name="settings_interval_title">Frequency</string>

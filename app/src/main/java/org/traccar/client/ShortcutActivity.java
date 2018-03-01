@@ -122,6 +122,7 @@ public class ShortcutActivity extends AppCompatActivity implements LostApiClient
                     preferences.getString(MainFragment.KEY_DEVICE, null),
                     preferences.getString(MainFragment.KEY_CAR, null),
                     preferences.getString(MainFragment.KEY_DRIVER, null),
+                    preferences.getString(MainFragment.KEY_ODOMETER, null),
                     location, PositionProvider.getBatteryLevel(this));
 
             String request = ProtocolFormatter.formatRequest(
