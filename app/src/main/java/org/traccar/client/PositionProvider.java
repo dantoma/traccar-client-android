@@ -68,7 +68,7 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
         carId = preferences.getString(MainFragment.KEY_CAR, "undefined");
         driverId = preferences.getString(MainFragment.KEY_DRIVER, "undefined");
         odometer = preferences.getString(MainFragment.KEY_ODOMETER, "undefined");
-        interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "600")) * 1000;
+        interval = Long.parseLong(preferences.getString(MainFragment.KEY_INTERVAL, "60")) * 1000;
         distance = Integer.parseInt(preferences.getString(MainFragment.KEY_DISTANCE, "0"));
         angle = Integer.parseInt(preferences.getString(MainFragment.KEY_ANGLE, "0"));
     }
@@ -96,7 +96,7 @@ public class PositionProvider implements LostApiClient.ConnectionCallbacks, Loca
         if (started) {
             LocationRequest request = LocationRequest.create()
                     .setPriority(getPriority(preferences.getString(MainFragment.KEY_ACCURACY, "medium")))
-                    .setInterval(distance > 0 || angle > 0 ? MINIMUM_INTERVAL : interval);
+                    .setInterval(interval);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, request, this);
         } else {
             apiClient.disconnect();
